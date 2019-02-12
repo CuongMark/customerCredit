@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!--<update handle="1column"/>-->
+    <head>
+        <css src="Magestore_Customercredit::css/customercredit.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magestore\Customercredit\Block\Customercreditlist" name="customercredit" template="Magestore_Customercredit::customercredit/customercreditlist.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

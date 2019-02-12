@@ -1,0 +1,251 @@
+"Credit Product Manager","Credit Product Manager"
+"Add Credit Product","Add Credit Product"
+"Credit Prices Settings","Credit Prices Settings"
+" "," "
+"Credit product let customers choose the price type they want.","Credit product let customers choose the price type they want."
+"Type of Store Credit Value","Type of Store Credit Value"
+"Credit Rate","Credit Rate"
+"Store Credit Value","Store Credit Value"
+"Store Credit Values","Store Credit Values"
+"Minimum Store Credit value","Minimum Store Credit value"
+"Maximum Store Credit value","Maximum Store Credit value"
+ID,ID
+Name,Name
+"Name in %1","Name in %1"
+SKU,SKU
+Quantity,Quantity
+Visibility,Visibility
+Status,Status
+Websites,Websites
+Action,Action
+Edit,Edit
+"Notify Low Stock RSS","Notify Low Stock RSS"
+CSV,CSV
+XML,XML
+Delete,Delete
+"Are you sure?","Are you sure?"
+"Change status","Change status"
+"Credit Information","Credit Information"
+"Current Credit Balance","Current Credit Balance"
+"Add or subtract  a credit value","Add or subtract  a credit value"
+"You can add or subtract an amount from customer’s balance by entering a number. For example, enter “99” to add $99 and “-99” to subtract $99","You can add or subtract an amount from customer’s balance by entering a number. For example, enter “99” to add $99 and “-99” to subtract $99"
+Comment,Comment
+"Send email to customer","Send email to customer"
+"Transaction History","Transaction History"
+"Store Credit","Store Credit"
+"Type of Transaction","Type of Transaction"
+"Transaction Detail","Transaction Detail"
+"Added/ Subtracted","Added/ Subtracted"
+"Credit Balance","Credit Balance"
+"Transaction Time","Transaction Time"
+"Manage Customers Using Credit","Manage Customers Using Credit"
+Email,Email
+Group,Group
+Telephone,Telephone
+ZIP,ZIP
+Country,Country
+State/Province,State/Province
+"Customer Since","Customer Since"
+Website,Website
+"Excel XML","Excel XML"
+"Used credit","Used credit"
+"Received credit","Received credit"
+"# Credit(%1)","# Credit(%1)"
+"This report shows the <b>used Credit </b> and <b>reveived Credit</b> of Customer","This report shows the <b>used Credit </b> and <b>reveived Credit</b> of Customer"
+"Credit Transactions","Credit Transactions"
+Transaction_Id,Transaction_Id
+"Transaction Type","Transaction Type"
+Added/Deducted,Added/Deducted
+"Customer Credit","Customer Credit"
+"Credit Code","Credit Code"
+"Recipient's Email","Recipient's Email"
+Amount,Amount
+"Sending Date","Sending Date"
+"If you do this, the recipient will not be able to use the code and the credit will be given back to your account. Are you sure you want to continue?","If you do this, the recipient will not be able to use the code and the credit will be given back to your account. Are you sure you want to continue?"
+Cancel,Cancel
+Verify,Verify
+"Please select product(s).","Please select product(s)."
+"Total of %d record(s) have been deleted.","Total of %d record(s) have been deleted."
+"Credit products","Credit products"
+"Total of %d record(s) have been updated.","Total of %d record(s) have been updated."
+"An error occurred while updating the product(s) status.","An error occurred while updating the product(s) status."
+"Please make sure to define SKU values for all processed products.","Please make sure to define SKU values for all processed products."
+"Customer Credit Chart","Customer Credit Chart"
+"Customer Credit Report","Customer Credit Report"
+"Credit Transaction","Credit Transaction"
+"Credit code %s has been used.","Credit code %s has been used."
+"cancel share credit ","cancel share credit "
+"Credit code has been canceled","Credit code has been canceled"
+"My Credit","My Credit"
+"Credit Products","Credit Products"
+"Redeem Credit","Redeem Credit"
+"Code is invalid. Please check again!","Code is invalid. Please check again!"
+"redeem credit by code '","redeem credit by code '"
+"Redeem success!","Redeem success!"
+"Share Credit","Share Credit"
+"Your credit amount not enough to share!","Your credit amount not enough to share!"
+"Invalid email. Please check again!","Invalid email. Please check again!"
+"Invalid amount. Please check again!","Invalid amount. Please check again!"
+" sent "," sent "
+" credit to "," credit to "
+" received "," received "
+" credit from "," credit from "
+"Credit has been successfully sent to ","Credit has been successfully sent to "
+"Invalid verify code. Please check again!","Invalid verify code. Please check again!"
+"A verification code has been sent to <a href=""mailto: %1""><b>your email</b></a>. Now, please check your email and verify your credit sending!","A verification code has been sent to <a href=""mailto: %1""><b>your email</b></a>. Now, please check your email and verify your credit sending!"
+"Account Dashboard","Account Dashboard"
+"Send Credit","Send Credit"
+"My Credit %1 ","My Credit %1 "
+"%2 My Credit %1","%2 My Credit %1"
+"Sender Name","Sender Name"
+"Send credit to friend","Send credit to friend"
+"Recipient name","Recipient name"
+"Recipient email","Recipient email"
+"Custom message","Custom message"
+"Before tax","Before tax"
+"After tax","After tax"
+"Exceeded maximum retries to find available random credit code!","Exceeded maximum retries to find available random credit code!"
+Unused,Unused
+Used,Used
+Cancelled,Cancelled
+"Awaiting verification","Awaiting verification"
+Select,Select
+"Fixed value","Fixed value"
+"Range of values","Range of values"
+"Dropdown values","Dropdown values"
+"Customer credit:","Customer credit:"
+"Please choose type of store credit value.","Please choose type of store credit value."
+"Store Credit Value is wrong, please try again.","Store Credit Value is wrong, please try again."
+"Store Credit Values is wrong, please try again.","Store Credit Values is wrong, please try again."
+"Minimum Credit value must be lower than maximum Credit value.","Minimum Credit value must be lower than maximum Credit value."
+"This product cannot be added to your cart. Please try other products.","This product cannot be added to your cart. Please try other products."
+"check out by credit for order #","check out by credit for order #"
+"Refund order #","Refund order #"
+"Credit balance is not enough to refund.","Credit balance is not enough to refund."
+" into customer credit"," into customer credit"
+Back,Back
+"As low as","As low as"
+"Credit Prices Settings ","Credit Prices Settings "
+"For example: 1.5","For example: 1.5"
+"Seperated by comma, e.g. 10,20,30","Seperated by comma, e.g. 10,20,30"
+"Minimum Store Credit Value","Minimum Store Credit Value"
+"Maximum Store Credit Value","Maximum Store Credit Value"
+"Refund Order to Credit","Refund Order to Credit"
+"Customer Name","Customer Name"
+"Credit Balance(' . . ')","Credit Balance(' . . ')"
+"Store Credit cannot be used to purchase Store Credit products","Store Credit cannot be used to purchase Store Credit products"
+"Use credit","Use credit"
+"Current credit balance: ","Current credit balance: "
+"Please enter a valid number.","Please enter a valid number."
+"This customer cannot use Store Credit","This customer cannot use Store Credit"
+"Store Credit Products","Store Credit Products"
+"Enter credit value","Enter credit value"
+"Select credit value","Select credit value"
+"Store Credit value: <span class=""regular-price"">%1</span>","Store Credit value: <span class=""regular-price"">%1</span>"
+"Sender name (optional):","Sender name (optional):"
+"Recipient name:","Recipient name:"
+"Recipient email address:","Recipient email address:"
+"Top 5 Customers with The Greatest Credit Balances ","Top 5 Customers with The Greatest Credit Balances "
+"Select Range","Select Range"
+"No Data Found","No Data Found"
+"Customer Credit Statistics","Customer Credit Statistics"
+"Total credit in system:","Total credit in system:"
+"Total credit used:","Total credit used:"
+"No. of Customers with credit: ","No. of Customers with credit: "
+"Special Price","Special Price"
+"Regular Price","Regular Price"
+From,From
+To,To
+"Apply Credit Discount","Apply Credit Discount"
+"Please ","Please "
+login,login
+" to use customer credit."," to use customer credit."
+"We are sorry that you can't use Store Credit","We are sorry that you can't use Store Credit"
+"Your current credit Balance is ","Your current credit Balance is "
+"Enter a credit amount if you want to pay by Customer Credit","Enter a credit amount if you want to pay by Customer Credit"
+"Please enter a number smaller than or equal to ""%1""!","Please enter a number smaller than or equal to ""%1""!"
+Apply,Apply
+"We can't find products matching the selection.","We can't find products matching the selection."
+"Add to Cart","Add to Cart"
+"In stock","In stock"
+"Out of stock","Out of stock"
+"Learn More","Learn More"
+"Enter credit code: ","Enter credit code: "
+"Redeem credit","Redeem credit"
+Redeem,Redeem
+"<b>Redeem Credit</b> allows users to redeem code into credit. The code is received from friends via email. If you have a credit code, please enter it in the above text box and press the <b>Redeem</b> button.","<b>Redeem Credit</b> allows users to redeem code into credit. The code is received from friends via email. If you have a credit code, please enter it in the above text box and press the <b>Redeem</b> button."
+"Reset Filter","Reset Filter"
+Search,Search
+"Select Date","Select Date"
+"There are no items matching this selection.","There are no items matching this selection."
+"Send Credit to friends","Send Credit to friends"
+"Enter verification code from your email:","Enter verification code from your email:"
+"Submit Code","Submit Code"
+"Credit Code List","Credit Code List"
+"Send Credit To Friend","Send Credit To Friend"
+"* Required Fields","* Required Fields"
+Loading...,Loading...
+"This email is an account email in this store!","This email is an account email in this store!"
+"You can't share credit for yourself !","You can't share credit for yourself !"
+"Please enter a valid email address.","Please enter a valid email address."
+"Your friend's email does not exist in the System. So your friend will receive credit via his/her email.","Your friend's email does not exist in the System. So your friend will receive credit via his/her email."
+"Amount to Send ( "" . . "" available )","Amount to Send ( "" . . "" available )"
+"Amount to Send","Amount to Send"
+"Your maximum credit is %1. Please enter a smaller number than this.","Your maximum credit is %1. Please enter a smaller number than this."
+Message,Message
+Send,Send
+"Send Credit To Friends","Send Credit To Friends"
+"Transactions History","Transactions History"
+Date,Date
+"Transaction Details","Transaction Details"
+"No record found","No record found"
+"Enter Credit Value: ","Enter Credit Value: "
+"Select Credit Value:","Select Credit Value:"
+"Store Credit value:","Store Credit value:"
+"<span class=""regular-price"">%1</span>","<span class=""regular-price"">%1</span>"
+"Enter Amount:","Enter Amount:"
+"Credit Rate: ","Credit Rate: "
+"Credit Value: ","Credit Value: "
+"Sender name (optional)","Sender name (optional)"
+"Recipient email address","Recipient email address"
+"Your Balance","Your Balance"
+"Your credit balance is: ","Your credit balance is: "
+"(Redeem credit code)","(Redeem credit code)"
+"Buy store credit","Buy store credit"
+"We are sorry that you can not use Store Credit","We are sorry that you can not use Store Credit"
+Please,Please
+"to use customer credit","to use customer credit"
+"You cannot send credit to yourself.","You cannot send credit to yourself."
+"Magestore Extension","Magestore Extension"
+"General Configuration","General Configuration"
+"Enable Store Credit","Enable Store Credit"
+"Allow sending credit","Allow sending credit"
+"Verify before sending credit","Verify before sending credit"
+"Groups can use credit","Groups can use credit"
+"Spend Credit On","Spend Credit On"
+"Apply Customer Credit","Apply Customer Credit"
+"Shipping Fee","Shipping Fee"
+"Email Configuration","Email Configuration"
+"Email template with credit code sent to recipients","Email template with credit code sent to recipients"
+"Email template with verification code sent to credit sender","Email template with verification code sent to credit sender"
+"Email template notifying customers","Email template notifying customers"
+"Send-to-customer email template when recipient receives credit","Send-to-customer email template when recipient receives credit"
+"Adjust time for Customer Credit reports on total used and total received credit","Adjust time for Customer Credit reports on total used and total received credit"
+"Select start time for current year","Select start time for current year"
+"Start date and month of the year to report
+                         <b>used credit </b> and <b>received credit.</b>.
+                    ","Start date and month of the year to report
+                         <b>used credit </b> and <b>received credit.</b>.
+                    "
+"Select start date for current month","Select start date for current month"
+"Start date of the month to report
+                         <b> used credit </b> and <b> received credit</b>.
+                    ","Start date of the month to report
+                         <b> used credit </b> and <b> received credit</b>.
+                    "
+"Style Configuration","Style Configuration"
+"Background of Title","Background of Title"
+"Default is 1E4075","Default is 1E4075"
+"Color of Title","Color of Title"
+"Default is FFFFFF","Default is FFFFFF"
+"Buy Store Credit","Buy Store Credit"

@@ -1,0 +1,129 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magestore" translate="label" sortOrder="0">
+            <label>Magestore Extension</label>
+        </tab>
+        <section id="customercredit" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Store Credit</label>
+            <tab>magestore</tab>
+            <resource>Magestore_Customercredit::settings</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Store Credit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="enable_send_credit" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow sending credit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+                <field id="validate" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Verify before sending credit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enable_send_credit">1</field>
+                    </depends>
+                </field>
+                <field id="assign_credit" translate="label comment" type="multiselect" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Groups can use credit</label>
+                    <source_model>Magestore\Customercredit\Model\Source\Customergroup</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="spend" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Spend Credit On</label>
+                <!--<field id="tax" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Apply Customer Credit</label>
+                    <source_model>Magestore\Customercredit\Model\Source\Aftertax</source_model>
+                    <comment></comment>
+                </field>-->
+                <field id="shipping" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Shipping Fee</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="email" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Email Configuration</label>
+                <field id="creditcode" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template with credit code sent to recipients</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+                <field id="verify" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template with verification code sent to credit sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+                <field id="notify" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Email template notifying customers</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+                <field id="notify_success" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send-to-customer email template when recipient receives credit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment></comment>
+                </field>
+            </group>
+            <group id="report" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Adjust time for Customer Credit reports on total used and total received credit</label>
+                <field id="ytd_start" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select start time for current year</label>
+                    <frontend_model>Magento\Reports\Block\Adminhtml\Config\Form\Field\YtdStart</frontend_model>
+                    <comment>Start date and month of the year to report
+                        <![CDATA[ <b>used credit </b> and <b>received credit.</b>]]>.
+                    </comment>
+                </field>
+                <field id="mtd_start" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Select start date for current month</label>
+                    <frontend_model>Magento\Reports\Block\Adminhtml\Config\Form\Field\MtdStart</frontend_model>
+                    <comment>Start date of the month to report
+                        <![CDATA[ <b> used credit </b> and <b> received credit</b>]]>.
+                    </comment>
+                </field>
+            </group>
+            <group id="style_management" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Style Configuration</label>
+                <field id="background_title" translate="label comment" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background of Title</label>
+                    <validate>color</validate>
+                    <frontend_model>Magestore\Customercredit\Block\Color</frontend_model>
+                    <comment>Default is 1E4075</comment>
+                </field>
+                <field id="color_title" translate="label comment" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Color of Title</label>
+                    <validate>color</validate>
+                    <frontend_model>Magestore\Customercredit\Block\Color</frontend_model>
+                    <comment>Default is FFFFFF</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+ 

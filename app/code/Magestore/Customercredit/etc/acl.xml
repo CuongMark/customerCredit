@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magestore_Customercredit::storecredit" title="Store Credit" sortOrder="30">
+                    <resource id="Magestore_Customercredit::customercredit" title="Manage Customers Using Credit" sortOrder="20" />
+                    <resource id="Magestore_Customercredit::creditproduct" title="Manage Credit Products" sortOrder="60" />
+                    <resource id="Magestore_Customercredit::credittransaction" title="Credit Transactions" sortOrder="80" />
+                    <resource id="Magestore_Customercredit::report_grid_credit" title="Manage Credit Transactions" sortOrder="100" />
+                    <resource id="Magestore_Customercredit::report_chart_credit" title="Customer Credit Report" sortOrder="110" />
+                </resource>
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Magestore_Customercredit::settings" title="Customercredit Settings" />
+                        </resource>
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

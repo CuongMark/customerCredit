@@ -1,0 +1,65 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block Magestore\Customercredit\Block\Order\Creditmemo\Refund
+ */
+?>
+<?php if (!$block->enableTemplate() && $block->isAssignCredit()): ?>
+    <p>
+        <label for="creditmemo_creditbalance_return_enable"><?php echo __('Refund Order to Credit') ?></label>
+        <input type="hidden" name="creditmemo[refund_creditbalance_return_enable]" value="0">
+        <input type="checkbox" name="creditmemo[refund_creditbalance_return_enable]" value="1" id="creditmemo_creditbalance_return_enable" checked="checked">
+        <input type="text" name="creditmemo[refund_creditbalance_return]" value="<?php echo $block->getGrandTotal() ?>" onchange="updateChangeStoreCreditCardAmount(this)" id="creditmemo_creditbalance_return" class="input-text not-negative-amount" style="width: 60px; text-align: right;">
+
+        <script type="text/javascript">
+            function updateChangeStoreCreditCardAmount(el) {
+                if (isNaN(parseFloat(el.value))) {
+                    el.value = 0;
+                    return true;
+                }
+                if (parseFloat(el.value) < 0) {
+                    el.value = 0;
+                    return true;
+                }
+                if (parseFloat(el.value) > <?php echo $block->getGrandTotal() ? $block->getGrandTotal() : '0' ?>) {
+                    el.value = <?php echo $block->getGrandTotal() ? $this->getGrandTotal() : '0' ?>;
+                    return true;
+                }
+            }
+            //<![CDATA[
+            require(['prototype'], function () {
+                function toggleCustomerBalanceRefundAmount() {
+                    if ($('creditmemo_creditbalance_return_enable').checked) {
+                        $('creditmemo_creditbalance_return').disabled = false;
+                    } else {
+                        $('creditmemo_creditbalance_return').disabled = true;
+                    }
+                }
+                Event.observe($('creditmemo_creditbalance_return_enable'), 'change', toggleCustomerBalanceRefundAmount);
+                toggleCustomerBalanceRefundAmount();
+            });
+            //]]>
+
+        </script>
+    </p>
+<?php endif; ?>

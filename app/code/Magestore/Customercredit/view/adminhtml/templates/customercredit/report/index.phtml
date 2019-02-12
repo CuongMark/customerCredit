@@ -1,0 +1,107 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block \Magestore\Customercredit\Block\Adminhtml\Report
+ */
+?>
+<script type="text/javascript">
+    //<![CDATA[
+    function changeDiagramsPeriod(periodObj) {
+        periodParam = periodObj.value ? 'period/' + periodObj.value + '/' : '';
+        ajaxBlockParam = 'block/adminhtml_report_customercredit/';
+        ajaxBlockUrl = '<?php echo $block->getUrl('*/*/ajaxBlock', array('_current' => true, 'block' => '', 'period' => '')) ?>' + ajaxBlockParam + periodParam;
+        new Ajax.Request(ajaxBlockUrl, {
+            parameters: {isAjax: 'true', form_key: FORM_KEY},
+            onSuccess: function (transport) {
+                tabContentElementId = 'diagram_tab_content';
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON()
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if (response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                    } else {
+                        $(tabContentElementId).update(transport.responseText);
+                    }
+                }
+                catch (e) {
+                    $(tabContentElementId).update(transport.responseText);
+                }
+            }
+        });
+        ajaxBlockUrl = '<?php echo $block->getUrl('*/*/ajaxBlock', array('_current' => true, 'block' => '', 'period' => '')) ?>' + periodParam;
+        new Ajax.Request(ajaxBlockUrl, {
+            parameters: {isAjax: 'true', form_key: FORM_KEY},
+            onSuccess: function (transport) {
+                tabContentElementId = 'dashboard_diagram_totals';
+                try {
+                    if (transport.responseText.isJSON()) {
+                        var response = transport.responseText.evalJSON()
+                        if (response.error) {
+                            alert(response.message);
+                        }
+                        if (response.ajaxExpired && response.ajaxRedirect) {
+                            setLocation(response.ajaxRedirect);
+                        }
+                    } else {
+                        $(tabContentElementId).replace(transport.responseText);
+                    }
+                }
+                catch (e) {
+                    $(tabContentElementId).replace(transport.responseText);
+                }
+            }
+        });
+    }
+    //]]>
+</script>
+<style type="text/css">
+    .entry-edit {
+        width: 100%;
+        margin-bottom: 30px;
+    }
+</style>
+<div class="dashboard-container">
+    <div cellspacing="25" width="50%" style="border-top: 39px solid #cddddd; float:left">
+
+        <div class="entry-edit">
+            <fieldset class="np"><?php echo $block->getChildHtml('statistics-credit'); ?></fieldset>
+        </div>
+        <div class="entry-edit">
+            <fieldset class="np">
+                <div class="entry-edit-head"><h4><?php echo __('Top 5 Customers with The Greatest Credit Balances ') ?></h4>
+                </div>
+                <?php echo $block->getChildHtml('max-balance'); ?>
+            </fieldset>
+        </div>
+    </div>
+    <div class="chart" style="border-top: 39px solid #cddddd; float:right">
+        <div class="entry-edit">
+            <?php echo $block->getChildHtml('customer-credit') ?>
+        </div>
+    </div>
+
+</div>

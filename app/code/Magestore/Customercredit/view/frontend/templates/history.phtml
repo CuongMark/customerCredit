@@ -1,0 +1,78 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block Magestore\Customercredit\Block\History
+ */
+?>
+<?php
+$transactions = $block->getCollection();
+?>
+<div class="box-account box-info box-customercredit-history">
+    <div class="title-credit">
+        <h2 class="title-credit-label"><?php /* @escapeNotVerified */
+            echo __('Transactions History') ?>
+        </h2>
+    </div>
+    <div class="block-content">
+        <?php if (count($transactions)) { ?>
+            <div class="table-wrapper" id="table-wrapper">
+                <table class="data table table-customercredit-transactions recent" id="transactions-history-new">
+                    <thead>
+                    <tr>
+                        <th scope="col" class="col date"><?php echo __('Date') ?></th>
+                        <th scope="col" class="col type"><?php echo __('Transaction Type') ?></th>
+                        <th scope="col" class="col details"><?php echo __('Transaction Details') ?></th>
+                        <th scope="col" class="col add-deduct"><?php echo __('Added/Deducted') ?></th>
+                        <th scope="col" class="col balance"><?php echo __('Credit Balance') ?></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach ($transactions as $transaction): ?>
+                        <tr>
+                            <td data-th="Date" style="white-space: nowrap;">
+                                <?php
+                                echo $block->getLocaleDateTime()->formatDate($transaction->getTransactionTime());
+                                ?>
+                            </td>
+
+                            <td data-th="Transaction Type"><?php echo __($block->getTransactionType($transaction->getTypeTransactionId())) ?></td>
+                            <td data-th="Transaction Details"><?php echo $transaction->getDetailTransaction() ?></td>
+                            <td data-th="Added/Deducted"><?php echo $block->getCurrencyLabel($transaction->getAmountCredit()) ?></td>
+                            <td data-th="Credit Balance"><?php echo $block->getCurrencyLabel($transaction->getEndBalance()) ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                    </tbody>
+                </table>
+                <?php if ($block->getPagerHtml()): ?>
+                    <div class="order-products-toolbar toolbar bottom" style="float: left;width: 100%"><?php echo $block->getPagerHtml(); ?></div>
+                <?php endif ?>
+            </div>
+        <?php } else { ?>
+            <div class="no-record">
+                <span><?php echo __('No record found') ?></span>
+            </div>
+        <?php } ?>
+        <div class="box-bottom">
+        </div>
+    </div>
+</div>

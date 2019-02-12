@@ -1,0 +1,178 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+    /**
+     * @var $block \Magestore\Customercredit\Block\Sharecredit $block
+     */
+    $store = $block->getStore();
+    $storeId = $store->getId();
+    echo $block->getLayout()->getMessagesBlock()->getGroupedHtml();
+    $session = $block->_customerSession();
+?>
+
+<style type="text/css">
+    .box-customercredit-history {float: left;}
+    #customercredit_show_loading { display: none; margin-top: 10px; }
+    #customercredit_show_loading img { float: left; margin-top: 2px; margin-right: 3px; }
+    #customercredit_show_success, #advice-your-email, #invalid-email, #customercredit_show_alert,
+    #advice-validate-max-number { display: none; }
+    .validation-advice p { color: red; }
+    #customercredit_show_alert p { color: red; margin-top: 2px; margin-right: 3px; }
+    .customercredit_message label {font-weight: bold;}
+    #customercredit_show_loading_p { display: none; margin-top: 10px; }
+    #verify-code-form p { margin-bottom: 5px; }
+    #verify-code-form .input-box { margin-bottom: 15px;float: left; }
+    .ms_hidden { display: none;}
+    .title-credit{ margin-bottom: 10px;}
+</style>
+
+<div id="sharecredit_page_wraper" class="main-customer col-lg-9 col-md-9 col-sm-9 col-xs-12">
+    <?php if ($block->enableSendCredit()): ?>
+        <div class="box-account box-info box-customercredit-share <?php echo ($session->getVerify() && $block->_creditHelper()->getGeneralConfig('validate')) ? 'ms_hidden' : '' ?>" id="box_customercredit_share">
+            <div class="title-credit"><h2 class="title-credit-label"><?php echo __('Send Credit To Friend') ?></h2></div>
+
+            <div class="customercredit_send_to_friend" id="customercredit_send_to_friend">
+                <?php $form_action = $block->getVerifyEnable() ? $block->getValidateUrl() : $block->getFormActionUrl() ; ?>
+                <form id="customercredit-form-content" method="post" action="<?php echo $form_action ?>" >
+                    <fieldset class="fieldset share-credit" data-hasrequired="<?php /* @escapeNotVerified */echo __('* Required Fields') ?>">
+                        <div class="field email required">
+                            <label class="label" for="email"><span><?php /* @escapeNotVerified */echo __("Recipient's Email") ?></span></label>
+                            <div class="control">
+                                <!--  <input name="customercredit_email_input" id="customercredit_email_input" value="" title="<?php echo __('Email') ?>>" class="input-text required-entry form-control" type="text"> -->
+                                <input name="customercredit_email_input" id="customercredit_email_input" class="input-text required-entry form-control email2 customercredit_email_input" type="email" title="<?php /* @escapeNotVerified */ echo __('Email') ?>" />
+                            </div>
+                        </div>
+                        <p id="customercredit_show_loading">
+                            <img src="<?php echo $block->getViewFileUrl('Magestore_Customercredit::images/opc-ajax-loader.gif') ?>"/><?php echo __('Loading...') ?>
+                        </p>
+
+                        <p id="customercredit_show_success">
+                            <img src="<?php echo $block->getViewFileUrl('Magestore_Customercredit::images/i_msg-success.gif') ?>"/>
+                            <?php echo __('This email is an account email in this store!') ?>
+                        </p>
+
+                        <div class="validation-advice" id="advice-your-email"><p><?php echo __('You can\'t share credit for yourself !') ?></p></div>
+                        <div class="validation-advice" id="invalid-email"><p><?php echo __('Please enter a valid email address.') ?></p></div>
+
+                        <div id="customercredit_show_alert" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <p><?php echo __('Your friend\'s email does not exist in the System. So your friend will receive credit via his/her email.'); ?></p>
+                        </div>
+                        <div class="field amount required">
+                            <label for="customercredit_value_input" class="label"><span><?php /* @escapeNotVerified */echo __("Amount to Send ( " . $block->getBalanceLabel() . " available )") ?></span></label>
+                            <div class="control">
+                                <input name="customercredit_value_input" type="text" data-validate="{required:true}" class="input-text validate-greater-than-zero" id="customercredit_value_input" title="<?php /* @escapeNotVerified */echo __('Amount to Send') ?>">
+                            </div>
+                        </div>
+
+                        <div class="validation-advice" id="advice-validate-max-number">
+                            <p><?php echo __('Your maximum credit is %1. Please enter a smaller number than this.', $block->getBalanceLabel()); ?></p>
+                        </div>
+
+                        <div class="customercredit_message">
+                            <label for="customercredit_message_textarea"><?php echo __("Message") ?></label>
+                            <textarea id="customercredit_message_textarea" name="customer-credit-share-message" class="form-control"></textarea>
+                        </div>
+
+                    </fieldset>
+
+                    <div class="buttons-set">
+                        <p id="customercredit_show_loading_p">
+                            <img src="<?php echo $block->getViewFileUrl('Magestore_Customercredit::images/opc-ajax-loader.gif') ?>"/><?php echo __('Loading...') ?>
+                        </p>
+                        <?php $button_send_type = $block->getVerifyEnable() ? 'button' : 'submit' ?>
+                        <button id="customercredit_send_credit_button" class="button validation-passed" title="<?php echo __('Send') ?>" type="<?php echo $button_send_type ?>">
+                            <span><span><?php echo __('Send') ?></span></span>
+                        </button>
+                        <button id="customercredit_cancel_button" class="button validation-passed" title="<?php echo __('Cancel') ?>" type="button" onclick="setLocation('<?php echo $block->getBackUrl(); ?>')">
+                            <span><span><?php echo __('Cancel') ?></span></span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <?php if ($block->getVerifyEnable()): ?>
+        <?php
+        $email = $session->getEmail();
+        $amount_credit = $session->getValue();
+        $is_check_email = $block->getRequest()->getParam('check_send_email');
+        $description = $session->getDescription();
+        $code_id = $session->getCreditCodeId();
+        ?>
+        <div class="box-account box-info box-customercredit-share <?php echo !$session->getVerify() ? 'ms_hidden' : ''?>" id="box_customercredit_verify">
+            <div class="title-credit">
+                <h2 class="title-credit-label"><?php echo __('Send Credit To Friends') ?></h2>
+            </div>
+            <div class="customercredit_show_verify_code" id="customercredit_show_verify_code">
+                <form action="<?php echo $block->getFormActionUrl(); ?>" method="post" id="verify-code-form">
+                    <p><strong><?php echo __('Enter verification code from your email:') ?></strong></p>
+                    <div class="input-box">
+                        <input type="text" class="input-text required-entry form-control" id="customer_credit_code" name="customercreditcode" value="<?php echo $block->getVerifyCode(); ?>"/>
+                        <input type="hidden" value="<?php echo $email; ?>" id="customercredit_value_emailhide" name="email_hide"/>
+                        <input type="hidden" value="<?php echo $amount_credit; ?>" id="customercredit_value_amounthide" name="amount_hide"/>
+                        <input type="hidden" value="<?php echo $description; ?>" id="customercredit_value_messagehide" name="message_hide"/>
+                        <?php if (isset($code_id)): ?>
+                            <input type="hidden" value="<?php echo $code_id; ?>" id="customercredit_credir_code_id" name="credit_code_id_hide"/>
+                        <?php endif; ?>
+                    </div>
+                    <button class="submit-code button" title="<?php echo __('Submit Code') ?>" type="submit">
+                        <span><span><?php echo __('Submit Code') ?></span></span>
+                    </button>
+                    <br>
+                </form>
+            </div>
+            <div id="back-to-send-form">
+                <a href="<?php echo $block->getUrl('customercredit/index/unVerifySender') ?>">&#171; Send Credit To Friend</a>
+            </div>
+        </div>
+    <?php endif ?>
+
+    <div class="box-account box-info box-customercredit-history">
+        <div class="title-credit">
+            <h2 class="credit-code-list title-credit-label"><?php echo __('Credit Code List') ?></h2>
+        </div>
+        <?php echo $block->getChildHtml() ?>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+        "#sharecredit_page_wraper": {
+            "shareCredit": {
+                "checkValidNumber": {
+                    "balance": <?php echo $block->getBalance(); ?>
+                },
+                "checkEmailExisted": {
+                    "my_email": "<?php echo $block->getCustomerEmail(); ?>",
+                    "url": "<?php echo $block->getUrl('customercredit/index'); ?>"
+                },
+                "changeSendStatus": {
+                    "hide": "<?php echo $block->getBalance() ?>",
+                    "my_email": "<?php echo $block->getCustomerEmail() ?>",
+                    "url": "<?php echo $block->getUrl('customercredit/index/sendemail/') ?>",
+                    "verify_enable": <?php echo $this->getVerifyEnable() ?>
+                }
+            }
+        }
+    }
+</script>

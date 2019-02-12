@@ -1,0 +1,55 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block \Magestore\Customercredit\Block\Adminhtml\Report\Customercredit
+ */
+?>
+
+<div style="margin:0px;">
+    <p class="switcher a-right" style="padding:5px 10px;"><?php echo __('Select Range') ?>:
+        <select name="period" id="report_<?php echo $block->getHtmlId() ?>_period"
+                onchange="changeDiagramsPeriod(this);">
+            <?php foreach ($block->getDashboardData()->getDatePeriods() as $_value => $_label): ?>
+                <?php if (in_array($_value, array('custom'))) continue; ?>
+                <option
+                    value="<?php echo $_value ?>" <?php if ($block->getRequest()->getParam('period') == $_value): ?> selected="selected"<?php endif; ?>><?php echo $_label ?></option>
+            <?php endforeach; ?>
+        </select></p>
+    <br/>
+    <?php
+    $_containerStyle = "width:{$block->getWidth()}px;height:{$block->getHeight()}px; margin:0 auto; margin-top:20px";
+    //$_containerStyle = "width:700px;height:500px; margin:0 auto;";
+    ?>
+    <?php
+    if ($block->getCount()):
+        ?>
+        <p style="<?php echo $_containerStyle ?>"><img src="<?php echo $block->getChartUrl(false) ?>" alt="chart"
+                                                       title="chart"/></p>
+        <div class="customer-credit-graph-comment" style="margin-top:20px; text-align:center">
+            <?php echo $block->getCommentContent(); ?>
+        </div>
+    <?php else:
+        ?>
+        <p class="a-center" style="<?php echo $_containerStyle ?>"><?php echo __('No Data Found') ?></p>
+    <?php endif; ?>
+</div>

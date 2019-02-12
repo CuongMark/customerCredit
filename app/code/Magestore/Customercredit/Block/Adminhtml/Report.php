@@ -1,0 +1,47 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+namespace Magestore\Customercredit\Block\Adminhtml;
+
+class Report extends \Magento\Backend\Block\Template
+{
+    /**
+     * Internal constructor, that is called from real constructor
+     * @return void
+     */
+    public function _construct()
+    {
+        parent::_construct();
+        $this->setTemplate('customercredit/report/index.phtml');
+    }
+
+    /**
+     * @return void
+     */
+    protected function _prepareLayout()
+    {
+        $this->setChild('statistics-credit',$this->getLayout()->createBlock('Magestore\Customercredit\Block\Adminhtml\Statisticscredit'));
+        $this->setChild('max-balance', $this->getLayout()->createBlock('Magestore\Customercredit\Block\Adminhtml\Maxbalance'));
+        $this->setChild('customer-credit', $this->getLayout()->createBlock('Magestore\Customercredit\Block\Adminhtml\Report\Dashboard'));
+        parent::_prepareLayout();
+    }
+}

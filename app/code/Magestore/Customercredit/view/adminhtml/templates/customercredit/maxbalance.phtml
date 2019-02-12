@@ -1,0 +1,60 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block Magestore\Customercredit\Block\Adminhtml\Maxbalance
+ */
+?>
+<?php $currency = $block->getLocaleCurrency()->getCurrency($block->getStore()->getCurrentCurrencyCode())->getSymbol() ?>
+<?php $collection = $this->getTopFiveCustomerMaxCreditBalan();
+?>
+<fieldset class="np" style="margin-bottom: 0px !important;">
+<div class="grid np">
+    <table cellspacing="0" style="border:0;" id="topSearchGrid_table">
+        <colgroup>
+            <col width="200">
+            <col width="200">
+        </colgroup>
+        <thead>
+        <tr class="headings">
+            <th><span class="nobr"><?php echo __('Customer Name') ?></span></th>
+            <th><span class="nobr"><?php echo __('Credit Balance (%s)',$currency) ?></span></th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php if (count($collection)): ?>
+            <?php foreach ($collection as $customer): ?>
+                <tr class="even pointer">
+                    <td class=" "><?php echo $block->getCreditHelper()->getCustomerName($customer['customer_id']) ?></td>
+                    <td class=" a-right last"><?php echo $block->getPriceCurrency()->convertAndFormat($customer['credit_balance']) ?></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php elseif ($block->getEmptyText()): ?>
+            <tr>
+                <td class="empty-text <?php echo $block->getEmptyTextClass() ?>"
+                    colspan="100"><?php echo $block->getEmptyText() ?></td>
+            </tr>
+        <?php endif; ?>
+        </tbody>
+    </table>
+</div>
+</fieldset>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!--<update handle="1column"/>-->
+    <update handle="customercredit_message"/>
+    <head>
+        <title>My Credit</title>
+        <css src="Magestore_Customercredit::css/bootstrap.css"/>
+    </head>
+    <body>
+        <referenceBlock name="head.components">
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Magestore\Customercredit\Block\Account\Navigation" name="customercredit_navigator" before="-" template="Magestore_Customercredit::customercredit/navigation.phtml">
+                <action method="setNavigationTitle">
+                    <argument name="title" xsi:type="string" translate="true">Store Credit</argument>
+                </action>
+                <action method="addLink">
+                    <argument name="name" xsi:type="string">dashboard</argument>
+                    <argument name="path" xsi:type="string">customer/account</argument>
+                    <argument name="label" xsi:type="helper" helper="Magestore\Customercredit\Helper\Account::getDashboardLabel"></argument>
+                    <argument name="disabled" xsi:type="string">0</argument>
+                    <argument name="order" xsi:type="string">10</argument>
+                </action>
+                <action method="addLink">
+                    <argument name="name" xsi:type="string">mycredit</argument>
+                    <argument name="path" xsi:type="string">customercredit/index/index</argument>
+                    <argument name="label" xsi:type="helper" helper="Magestore\Customercredit\Helper\Data::getCustomercreditLabel"></argument>
+                    <argument name="disabled" xsi:type="string">0</argument>
+                    <argument name="order" xsi:type="string">20</argument>
+                </action>
+                <action method="addLink">
+                    <argument name="name" xsi:type="string">sharecredit</argument>
+                    <argument name="path" xsi:type="string">customercredit/index/share</argument>
+                    <argument name="label" xsi:type="helper" helper="Magestore\Customercredit\Helper\Account::getSendCreditLabel"></argument>
+                    <argument name="disabled" xsi:type="helper" helper="Magestore\Customercredit\Helper\Data::sendCredit"></argument>
+                    <argument name="order" xsi:type="string">30</argument>
+                </action>
+                <action method="addLink">
+                    <argument name="name" xsi:type="string">redeem</argument>
+                    <argument name="path" xsi:type="string">customercredit/index/redeem</argument>
+                    <argument name="label" xsi:type="helper" helper="Magestore\Customercredit\Helper\Account::getRedeemCreditLabel"></argument>
+                    <argument name="disabled" xsi:type="string">0</argument>
+                    <argument name="order" xsi:type="string">40</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="creditdiscount" instance="Magestore\Customercredit\Model\Total\Quote\Discount" sort_order="430"/>
+            <item name="creditdiscountaftertax" instance="Magestore\Customercredit\Model\Total\Quote\DiscountAfterTax" sort_order="480"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="customercredit" instance="Magestore\Customercredit\Model\Total\Order\Invoice\CreditDiscount" sort_order="180"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="customercredit" instance="Magestore\Customercredit\Model\Total\Order\Creditmemo\CreditDiscount" sort_order="230"/>
+        </group>
+    </section>
+    <order>
+        <available_product_type name="customercredit"/>
+    </order>
+</config>

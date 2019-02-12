@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="storecredit_fieldset" xsi:type="array">
+                    <item name="class" xsi:type="string">Magestore\Customercredit\Ui\DataProvider\Product\Form\Modifier\StoreCreditFieldset</item>
+                    <item name="sortOrder" xsi:type="number">200</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Catalog\Block\Adminhtml\Product\Edit\Button\Back">
+        <plugin name="button_back_to_credit_product" type="Magestore\Customercredit\Plugin\Adminhtml\Block\Catalog\BackButton"/>
+    </type>
+
+    <type name="Magento\Customer\Block\Adminhtml\Edit\BackButton">
+        <plugin name="button_back_to_credit_customer" type="Magestore\Customercredit\Plugin\Adminhtml\Block\Customer\BackButton"/>
+    </type>
+
+
+    <type name="Magento\Sales\Block\Adminhtml\Items\AbstractItems">
+        <plugin name="button_back_to_credit_customer" type="Magestore\Customercredit\Plugin\Adminhtml\Items\GetPriceDataObject"/>
+    </type>
+</config>

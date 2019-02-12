@@ -1,0 +1,54 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+* @var $block \Magestore\Customercredit\Block\Adminhtml\Statisticscredit
+*/
+?>
+<div class="entry-edit-head"><h4><?php echo __('Customer Credit Statistics') ?></h4></div>
+<fieldset class="np" style="margin-bottom: 0px !important;">
+    <div class="grid np">
+        <table cellspacing="0" style="border:0;" id="topSearchGrid_table">
+            <colgroup>
+                <col>
+                <col width="100">
+                <col width="200">
+            </colgroup>
+            <thead>
+            <tbody>
+            <tr class="even pointer">
+                <td class=" " width="50%"><?php echo __('Total credit in system:') ?></td>
+                <td class=" a-right last"><?php echo $block->getTotalCredit() ?></td>
+            </tr>
+            <tr class="pointer">
+                <td class=" " width="50%"><?php echo __('Total credit used:') ?></td>
+                <td class=" a-right last"><?php echo $block->getCreditUsed() ?></td>
+            </tr>
+            <tr class="even pointer">
+                <td class=" " width="50%"><?php echo __('No. of Customers with credit: ') ?></td>
+                <td class=" a-right last"
+                    style="width: 50%;"><?php echo $block->getCustomerWithCredit() . '(' . $block->percentCredit() . '% of all customers)' ?></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</fieldset>

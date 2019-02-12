@@ -1,0 +1,48 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block Magestore\Customercredit\Block\Sumary
+ */
+?>
+<div class="box-account box-info box-customercredit-sumary">
+    <div class="block-title" style="margin-top: 10px;">
+        <img src="<?php echo $block->getViewFileUrl('Magestore_Customercredit::images/point.png') ?>"/>
+        <strong><?php /* @escapeNotVerified */
+            echo __('Your Balance') ?></strong>
+    </div>
+    <div class="page-title title-buttons">
+        <p style="float: left; margin-top: 10px;">
+            <?php echo __('Your credit balance is: ') ?>
+            <strong class="customerreward-money" style="color: #3182be">
+                <?php echo $block->getBalanceLabel() ?>
+            </strong>
+            <a href="<?php echo $block->getUrl('customercredit/index/redeem') ?>">
+                <?php echo __('(Redeem credit code)') ?>
+            </a>
+        </p>
+        <button type="button" style="float: right; margin-top: 20px" class="form-button button right"
+                onclick="window.location.href = '<?php echo $block->getUrl('customercredit/index/listproduct') ?>'">
+            <span><span><?php echo __('Buy store credit') ?></span></span>
+        </button>
+    </div>
+</div>

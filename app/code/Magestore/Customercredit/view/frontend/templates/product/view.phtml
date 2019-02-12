@@ -1,0 +1,134 @@
+<style type="text/css">
+    #magestore_customer_credit_scope label{ font-size: 15px; display: inline-block; font-weight: bold }
+    #magestore_customer_credit_scope select{ display: inline-block; width: 50%; }
+    #magestore_customer_credit_scope .product-review{ margin-left: 148px; }
+    #magestore_customer_credit_scope #credit_amount_range{ max-width: 135px; height: 25px; font-size: 14px; }
+    #magestore_customer_credit_scope .credit_type_range_div{ float: left;width: 100%; }
+</style>
+<?php
+/**
+ * @var $block Magestore\Customercredit\Block\Product\View
+ */
+$store = $block->getStore();
+$_product = $block->getProduct();
+$_creditAmount = $block->getCreditAmount($_product);
+$_formData = $block->getFormConfigData();
+$includeTax = ( $block->getTaxHelper()->getPriceDisplayType() != 1 );
+$rateTax = $block->getCatalogHelper()->getTaxPrice($_product, 100, $includeTax) / 100;
+
+$credit_amount_range_current = ($_formData->getAmount() ? $_formData->getAmount() : (array_key_exists('from', $_creditAmount) ? $_creditAmount['from'] : 0)) ;
+?>
+<div class="price-box">
+    <span class="regular-price">
+        <span class="price" id="storecredit-product-value">
+            &nbsp;
+        </span>
+    </span>
+</div>
+<input type="hidden" name="credit_price_amount" id="credit_price_amount" value="0"/>
+
+<div class="customercredit-product-info">
+    <div id="magestore_customer_credit_scope">
+        <?php if ($_creditAmount['type'] == 'range'): ?>
+            <div id="magestore_customer_credit_scope">
+                <div class="credit_type_range_div">
+                    <p>
+                        <label class="required" for="amount"><?php echo __('Enter Credit Value: ') ?></label>&nbsp;
+                        <input id="credit_amount_range" name="amount" class="input-text required-entry validate-greater-than-zero" value="<?php echo $credit_amount_range_current ?>" />
+                    </p>
+                    <div class="product-review">(<span class="price"><?php echo $_creditAmount['from_txt'] ?></span> -  <span class="price"><?php echo $_creditAmount['to_txt'] ?></span>)</div>
+                </div>
+            </div>
+        <?php elseif ($_creditAmount['type'] == 'dropdown'): ?>
+            <div id="magestore_customer_credit_scope">
+                <p>
+                    <label for="amount"><?php echo __('Select Credit Value:') ?></label>
+                    <select id="credit_amount_dropdown" name="amount" class="required-entry select">
+                        <?php $options = array_combine($_creditAmount['options'], $_creditAmount['options_txt']) ?>
+                        <?php foreach ($options as $value => $label): ?>
+                            <option value="<?php echo $value ?>" <?php if ($value == $_formData->getAmount()) echo 'selected' ?> ><?php echo $label ?></option>
+                        <?php endforeach ?>
+                    </select>
+                </p>
+            </div>
+        <?php elseif ($_creditAmount['type'] == 'static'): ?>
+            <div id="magestore_customer_credit_scope">
+                <p>
+                    <label class="required" for="amount"><?php echo __('Store Credit value:') ?></label>
+                    <?php echo __('<span class="regular-price">%1</span>', '&nbsp;'.$_creditAmount['value_txt']) ?>
+                    <input type="hidden" name="amount" value="<?php echo $_creditAmount['value'] ?>" />
+                </p>
+            </div>
+        <?php elseif ($_creditAmount['type'] == 'any'): ?>
+            <div id="magestore_customer_credit_scope">
+                <p>
+                    <label for="amount"><?php echo __('Enter Amount:') ?></label>
+                    <input id="amount" name="amount" class="credit_type_any_amount input-text required-entry validate-greater-than-zero" value="<?php echo $_formData->getAmount() ?>" />
+                </p>
+                <p><?php echo __('Credit Rate: ') . $_product->getStorecreditRate() ;?></p>
+                <?php echo __('Credit Value: ') ?>
+                <span class="value" class="credit_type_any_value" id="value"><?php echo $_product->getStorecreditValue(); ?></span>
+            </div>
+        <?php endif ?>
+
+    </div>
+
+    <script type="text/x-magento-init">
+        {
+            "#magestore_customer_credit_scope": {
+                "productCredit": {
+                    "type": "<?php echo array_key_exists('type', $_creditAmount) ? $_creditAmount['type'] : '0' ?>",
+                    "storecredit_rate": <?php echo array_key_exists('storecredit_rate', $_creditAmount)  ? $_creditAmount['storecredit_rate'] : 0 ?>,
+                    "rate_tax": <?php echo $rateTax ? $rateTax : 0 ?>,
+                    "from": <?php echo array_key_exists('from', $_creditAmount) ? $_creditAmount['from'] : 0  ?>,
+                    "to": <?php echo array_key_exists('to', $_creditAmount) ? $_creditAmount['to'] : 0 ?>,
+                    "priceFormatJs": <?php echo $block->getPriceFormatJs() ?>,
+                    "credit_amount_min": <?php echo array_key_exists('from', $_creditAmount) ? $_creditAmount['from'] : 0 ?>,
+                    "credit_amount_max": <?php echo array_key_exists('to', $_creditAmount)  ? $_creditAmount['to'] : 0 ?>,
+                    "priceFormat": "<?php echo $store->getCurrentCurrency()->format(1000, array(), false); ?>",
+                    "prices": <?php echo array_key_exists('prices', $_creditAmount) ? json_encode($_creditAmount['prices']) : '{}' ?>,
+                    "price": <?php echo array_key_exists('price', $_creditAmount) ? $_creditAmount['price'] : 0 ?>,
+                    "amount": <?php echo $_formData->getAmount() ? $_formData->getAmount() : 0 ?>,
+                    "rate": <?php echo $_product->getStorecreditRate() ? $_product->getStorecreditRate() : 0 ?>
+                }
+            }
+        }
+    </script>
+
+
+    <?php if ($block->allowSendCredit()): ?>
+        <div id="send_credit_to_friend_form">
+            <p class="customercredit-send-friend">
+                <input type="checkbox" value="1" name="send_friend" id="send_friend" <?php if ($_formData->getSendFriend()) echo 'checked' ?> />
+                <label for="send_friend"><?php echo __('Send credit to friend') ?></label>
+            </p>
+
+            <div class="customercredit-receiver" id="customercredit-receiver" style="<?php if (!$_formData->getSendFriend()) echo 'display:none;' ?>">
+                <fieldset class="fieldset product-credit" data-hasrequired="<?php echo __('* Required Fields') ?>">
+                    <div class="field sender">
+                        <label for="customer_name"><?php echo __('Sender name (optional)') ?></label><br/>
+                        <input type="text" class="input-text" name="customer_name" id="customer_name" value="<?php echo $_formData->getCustomerName() ?>" maxlength="30"/>
+                    </div>
+                    <div class="field recipient_name required">
+                        <label class="label" for="recipient_name"><?php echo __('Recipient name') ?></label><br/>
+                        <input type="text" class="input-text required-entry" name="recipient_name" id="recipient_name" value="<?php echo $_formData->getRecipientName() ?>" maxlength="30"/>
+                    </div>
+                    <div class="field recipient_email required">
+                        <label class="label" for="recipient_email"><?php echo __('Recipient email address') ?></label><br/>
+                        <input type="text" class="input-text required-entry validate-email validate-same-email" name="recipient_email" id="recipient_email" value="<?php echo $_formData->getRecipientEmail() ?>"/>
+                    </div>
+                    <label class="message" for="message"><?php echo __('Custom message') ?></label><br/>
+                    <textarea name="message" id="message" class=""><?php echo $_formData->getMessage() ?></textarea><br/>
+                </fieldset>
+            </div>
+        </div>
+
+        <script type="text/x-magento-init">
+        {
+            "#send_credit_to_friend_form": {
+                "sendCreditToFriend": {}
+            }
+        }
+    </script>
+    <?php endif; ?>
+</div>

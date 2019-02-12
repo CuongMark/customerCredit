@@ -1,0 +1,82 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */
+
+/**
+ * @var $block Magestore\Customercredit\Block\Adminhtml\Order\Form
+ */
+?>
+
+<?php
+if ($this->getCreditHelper()->getGeneralConfig('enable')):
+    $customerGroupCheck = $this->getAccountHelper()->customerGroupCheck();
+    $creditAmount = $block->getAppliedCreditAmount();
+    $customer_credit = $block->convertPrice($block->getCustomerCredit(), true, false);
+?>
+    <div class="admin__field field-apply-customer-credit" id="admin_customercredit_coupon">
+        <label class="admin__field-label"><span><?php echo __('Customer Credit') ?></span></label>
+
+        <div class="admin__field-control" id="customercredit_container" >
+            <?php if (!$block->hasCustomerCreditItemOnly() && $customerGroupCheck) : ?>
+
+                <?php if ($block->hasCustomerCreditItem()): ?>
+                    <p style="font-weight: bold"><?php echo __('Store Credit cannot be used to purchase Store Credit products'); ?></p>
+                <?php endif; ?>
+                <input class="admin__control-text" type="text" name="customer_credit" id="customercredit_input" value="<?php echo $creditAmount; ?>" />
+                <button id="btn-apply-credit" disabled title="Apply" type="button" class="action-default scalable" data-ui-id="widget-button-14" ><span><?php echo __('Use credit') ?></span></button>
+
+                <?php if($creditAmount > 0) : ?>
+                <p class="added-credit">
+                    <span>Applied <?php echo $block->convertPrice($creditAmount) ?></span>
+                    <a href="#" id="btn-cancel-credit" onclick="return false;" title="Cancel" class="action-remove"><span>Remove</span></a>
+                </p>
+                <?php endif; ?>
+                <p><?php echo __("Current credit balance: ") . " <b>" . $customer_credit . "</b>"; ?></p>
+
+                <div class="validation-advice" style="display:none" id="advice-validate-number-customer_credit">
+                    <span style="color: red; font-size: 11px;"><?php echo __('Please enter a valid number.'); ?></span>
+                </div>
+
+            <?php elseif ($block->hasCustomerCreditItemOnly()) : ?>
+                <p style="font-weight: bold"><?php echo __('Store Credit cannot be used to purchase Store Credit products'); ?></p>
+            <?php else : ?>
+                <p style="font-weight: bold"><?php echo __('This customer cannot use Store Credit'); ?></p>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        require([
+            'jquery',
+            'customerCreditForm'
+        ], function ($) {
+            $(function () {
+                $('#admin_customercredit_coupon')
+                    .customerCreditForm({
+                        applyCreditForm: {
+                            url: "<?php echo $block->getUrl('customercreditadmin/checkout/creditPost') ?>",
+                            current_credit: "<?php echo $block->getDefaultCustomerCredit() ?>"
+                        }
+                    });
+            });
+        });
+    </script>
+<?php endif; ?>

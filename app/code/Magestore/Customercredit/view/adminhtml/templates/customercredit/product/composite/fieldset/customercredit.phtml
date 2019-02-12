@@ -1,0 +1,128 @@
+<?php
+/**
+ * Magestore
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Magestore.com license that is
+ * available through the world-wide-web at this URL:
+ * http://www.magestore.com/license-agreement.html
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Magestore
+ * @package     Magestore_Customercredit
+ * @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+ * @license     http://www.magestore.com/license-agreement.html
+ *
+ */ /* @var $block Magestore\Customercredit\Block\Adminhtml\Product\View */ ?>
+<?php
+$store = $block->getObjectManager()->get('Magento\Backend\Model\Session\Quote')->getStore();
+$_product = $block->getProduct();
+$_creditAmount = $block->getCreditAmount($_product);
+$_generalConfig = $block->getHelperData()->getGeneralConfig('enable_send_credit');
+$_formData = $block->getFormConfigData();
+?>
+
+<div id="catalog_product_composite_configure_fields_customercredit" class="fieldset admin__fieldset composite-customercredit<?php echo $block->getIsLastFieldset() ? ' last-fieldset' : '' ?>">
+    <label class="legend admin__legend"><span><?php echo __('Store Credit Products') ?></span></label>
+
+    <div class="product-options">
+        <?php if ($_creditAmount['type'] == 'range'): ?>
+            <?php
+            $includeTax = ($block->getTaxHelper()->getPriceDisplayType() != 1);
+            $rateTax = $block->getCatalogHelper()->getTaxPrice($_product, 100, $includeTax) / 100;
+            ?>
+            <div class="field admin__field">
+                <label class="label admin__field-label"><?php echo __('Enter credit value') ?></label>
+            </div>
+            <div class="control admin__field-control">
+                <input id="amount_range" name="amount" class="required-entry validate-greater-than-zero" value="<?php echo $_formData->getAmount() / $_creditAmount['storecredit_rate'] ; ?>"/>
+                (<span class="price"><?php echo $_creditAmount['from_txt'] ?></span> - <span class="price"><?php echo $_creditAmount['to_txt'] ?></span>)
+            </div>
+
+        <?php elseif ($_creditAmount['type'] == 'dropdown'): ?>
+            <div class="field admin__field">
+                <label class="label admin__field-label"><?php echo __('Select credit value') ?></label>
+                <div class="control admin__field-control">
+                    <select id="amount_dropdown" name="amount" class="admin__control-select required-entry super-attribute-select">
+                        <?php $options = array_combine($_creditAmount['options'], $_creditAmount['options_txt']) ?>
+                        <?php foreach ($options as $value => $label): ?>
+                            <option value="<?php echo $value ?>" <?php if ($value == $_formData->getAmount()) echo 'selected' ?> ><?php echo $label ?></option>
+                        <?php endforeach ?>
+                    </select>
+                    <input id="hidden_price" type="hidden" value="1" price="<?php echo ($_creditAmount['options'][0] * $_product->getData('storecredit_rate')) ?>" qtyid="product_composite_configure_input_qty">
+                </div>
+            </div>
+
+        <?php elseif ($_creditAmount['type'] == 'static'): ?>
+            <div class="field admin__field">
+                <label
+                    class="label admin__field-label"><?php echo __('Store Credit value: <span class="regular-price">%1</span>', $_creditAmount['value_txt']) ?>
+                </label>
+
+                <div class="control admin__field-control">
+                    <input type="hidden" name="amount" value="<?php echo $_creditAmount['value'] ?>" price="<?php echo $_creditAmount['value'] * $_product->getData('storecredit_rate') ?>"/>
+                </div>
+            </div>
+        <?php endif ?>
+
+        <?php if ($_generalConfig == '1'): ?>
+        <div class="input-box">
+            <input type="checkbox" value="1" name="send_friend" id="send_friend"  <?php if ($_formData->getSendFriend()) echo 'checked' ?> />
+            <label for="send_friend"><?php echo __('Send credit to friend') ?></label>
+        </div>
+        <?php endif ?>
+        <br>
+
+        <div class="customercredit-receiver" id="customercredit-receiver" style="<?php if (!$_formData->getSendFriend()) echo 'display:none;' ?>">
+            <p>
+                <label for="customer_name"><?php echo __('Sender name (optional):') ?></label><br/>
+                <input type="text" name="customer_name" id="customer_name" value="<?php echo $_formData->getCustomerName() ?>" maxlength="30"/>
+            </p>
+
+            <p>
+                <label for="recipient_name"><?php echo __('Recipient name:') ?><span style="color:red"> * </span></label><br/>
+                <input type="text" name="recipient_name" id="recipient_name" value="<?php echo $_formData->getRecipientName() ?>" maxlength="30"/>
+            </p>
+
+            <p>
+                <label class="recipient_email" for="recipient_email"><?php echo __('Recipient email address:') ?><span style="color:red"> * </span></label><br/>
+                <input type="text" name="recipient_email" id="recipient_email" value="<?php echo $_formData->getRecipientEmail() ?>"/>
+            </p>
+
+            <p>
+                <label class="message_send_credit" for="message"><?php echo __('Custom message') ?></label><br/>
+                <textarea name="message" id="message" class=""><?php echo $_formData->getMessage() ?></textarea><br/>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    require([
+        'jquery',
+        'customerCreditForm'
+    ], function ($) {
+        $(function () {
+            $('#catalog_product_composite_configure_fields_customercredit')
+                .customerCreditForm({
+                    setAmountDropDown: {
+                        priceFormat: "<?php echo $store->getCurrentCurrency()->format(1000, array(), false); ?>",
+                        creditRate: "<?php echo $_product->getData('storecredit_rate')?>"
+                    },
+                    <?php if ($_creditAmount['type'] == 'range'): ?>
+                    validateInputRange: {
+                        from: <?php echo $_creditAmount['from'] ?>,
+                        to: <?php echo $_creditAmount['to'] ?>,
+                        priceFormat: "<?php echo $store->getCurrentCurrency()->format(1000, array(), false); ?>",
+                        creditRate: <?php echo $_creditAmount['storecredit_rate'] ?>,
+                    },
+                    <?php endif; ?>
+                    sendCreditToFriend: {}
+                });
+        });
+    });
+</script>

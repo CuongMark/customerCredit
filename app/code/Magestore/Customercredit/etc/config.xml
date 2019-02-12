@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customercredit>
+            <general>
+                <enable>1</enable>
+                <enable_send_credit>0</enable_send_credit>
+                <sendverify>0</sendverify>
+                <assign_credit>1,2,3,4</assign_credit>
+            </general>
+            <spend>
+                <tax>1</tax>
+                <shipping>0</shipping>
+            </spend>
+            <email>
+                <verify>customercredit_email_verify</verify>
+                <creditcode>customercredit_email_code</creditcode>
+                <notify>customercredit_email_notify</notify>
+                <sender>general</sender>
+                <notify_success>customercredit_email_notify_success</notify_success>
+            </email>
+            <style_management>
+                <background_title>#1E4075</background_title>
+                <color_title>#FFFFFF</color_title>
+            </style_management>
+            <report>
+                <mtd_start>1</mtd_start>
+            </report>
+        </customercredit>
+    </default>
+</config>
+

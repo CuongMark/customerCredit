@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="customercredit_email_verify" label="Email Template Validate Sender Shared Credit" file="customercredit/verify_code.html" type="html" module="Magestore_Customercredit" area="frontend"/>
+    <template id="customercredit_email_creditcode" label="Email Template Credit Code" file="customercredit/credit_code.html" type="html" module="Magestore_Customercredit" area="frontend"/>
+    <template id="customercredit_email_notify" label="Email Template Notify To Customer" file="customercredit/notify.html" type="html" module="Magestore_Customercredit" area="frontend"/>
+    <template id="customercredit_email_notify_success" label="Send message to customer when Credit is sent to friend" file="customercredit/notify_success.html" type="html" module="Magestore_Customercredit" area="frontend"/>
+</config>

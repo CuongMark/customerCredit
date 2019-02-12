@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+  ~ Magestore
+  ~
+  ~ NOTICE OF LICENSE
+  ~
+  ~ This source file is subject to the Magestore.com license that is
+  ~ available through the world-wide-web at this URL:
+  ~ http://www.magestore.com/license-agreement.html
+  ~
+  ~ DISCLAIMER
+  ~
+  ~ Do not edit or add to this file if you wish to upgrade this extension to newer
+  ~ version in the future.
+  ~
+  ~ @category    Magestore
+  ~ @package     Magestore_Customercredit
+  ~ @copyright   Copyright (c) 2017 Magestore (http://www.magestore.com/)
+  ~ @license     http://www.magestore.com/license-agreement.html
+  ~
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Magestore_Customercredit::storecredit" title="Store Credit" module="Magestore_Customercredit" sortOrder="30" resource="Magestore_Customercredit::storecredit"/>
+        <add id="Magestore_Customercredit::creditproduct" title="Manage Credit Products" module="Magestore_Customercredit" sortOrder="10" parent="Magestore_Customercredit::storecredit" action="customercreditadmin/creditproduct/index" resource="Magestore_Customercredit::creditproduct"/>
+        <add id="Magestore_Customercredit::customercredit" title="Manage Customers Using Credit" module="Magestore_Customercredit" parent="Magestore_Customercredit::storecredit" sortOrder="20" action="customercreditadmin/customercredit/index" resource="Magestore_Customercredit::customercredit"/>
+        <add id="Magestore_Customercredit::credittransaction" title="Credit Transactions" module="Magestore_Customercredit" sortOrder="30" parent="Magestore_Customercredit::storecredit" resource="Magestore_Customercredit::storecredit"/>
+        <add id="Magestore_Customercredit::report_grid_credit" title="Manage Credit Transactions" module="Magestore_Customercredit" sortOrder="10" parent="Magestore_Customercredit::credittransaction" action="customercreditadmin/reporttransaction/index" resource="Magestore_Customercredit::report_grid_credit"/>
+        <add id="Magestore_Customercredit::report_chart_credit" title="Customer Credit Report" module="Magestore_Customercredit" sortOrder="20" parent="Magestore_Customercredit::credittransaction" action="customercreditadmin/reporttransaction/dashboard" resource="Magestore_Customercredit::report_chart_credit"/>
+        <add id="Magestore_Customercredit::settings" title="Settings" module="Magestore_Customercredit" sortOrder="40" parent="Magestore_Customercredit::storecredit" action="adminhtml/system_config/edit/section/customercredit" resource="Magestore_Customercredit::settings"/>
+    </menu>
+</config>
