@@ -24,4 +24,7 @@
     <type name="Magento\Wishlist\Block\Customer\Wishlist\Item\Column\Cart">
         <plugin name="get_item_add_to_cart_params" type="Magestore\Customercredit\Plugin\GetItemAddToCartParams"/>
     </type>
+    <type name="Magento\Customer\CustomerData\Customer">
+        <plugin name="add_store_credit" type="Magestore\Customercredit\CustomerData\Plugin\Customer" />
+    </type>
 </config>

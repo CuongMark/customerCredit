@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type instance="Magestore\Customercredit\Model\Cache\CustomerCredit" name="customer_credit_cache_tag" translate="label,description">
+        <label>customer_credit</label>
+        <description/>
+    </type>
+</config>

@@ -34,6 +34,8 @@ class TransactionType extends \Magento\Framework\Model\AbstractModel
     const TYPE_BUY_CREDIT = 8;
     const TYPE_CANCEL_ORDER = 9;
     const TYPE_REFUND_CREDIT_PRODUCT = 10;
+    const TYPE_WIN_RAFFLE = 12;
+    const TYPE_PURCHASE_TICKET = 11;
 
     /**
      * Set resource model and Id field name

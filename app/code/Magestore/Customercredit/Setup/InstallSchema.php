@@ -305,6 +305,8 @@ class InstallSchema implements InstallSchemaInterface
         $data['7']['transaction_name'] = 'Customer Buy Credit';
         $data['8']['transaction_name'] = 'Cancel Order';
         $data['9']['transaction_name'] = 'Refund Credit Product';
+        $data['10']['transaction_name'] = 'Purchase Ticket';
+        $data['11']['transaction_name'] = 'Winning Ticket';
         $installer->getConnection()->insertMultiple($setup->getTable('type_transaction'), $data);
 
         $installer->getConnection()->addColumn($installer->getTable('sales_order'), 'customercredit_discount', ['type'=>Table::TYPE_DECIMAL, 'size'=>'12,4', 'nullable' => true,'comment' =>'customer credit']);

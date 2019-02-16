@@ -83,6 +83,9 @@ class Transaction extends \Magento\Framework\Model\AbstractModel
 
     public function addTransactionHistory($customer_id, $transaction_type_id, $transaction_detail, $order_id, $amount_credit)
     {
+        if($amount_credit == 0){
+            return;
+        }
         $spent_credit = 0;
         $received_credit = 0;
 
@@ -99,6 +102,10 @@ class Transaction extends \Magento\Framework\Model\AbstractModel
         }
 
         if ($transaction_type_id == TransactionType::TYPE_BUY_CREDIT) {
+            $received_credit = ($amount_credit > 0) ? $amount_credit : -$amount_credit;
+        }
+
+        if ($transaction_type_id == TransactionType::TYPE_WIN_RAFFLE) {
             $received_credit = ($amount_credit > 0) ? $amount_credit : -$amount_credit;
         }
 
