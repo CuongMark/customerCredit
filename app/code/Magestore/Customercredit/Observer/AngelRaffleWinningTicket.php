@@ -78,7 +78,7 @@ class AngelRaffleWinningTicket implements ObserverInterface
                 $ticket->getPrize()
             );
             $customerCredit->changeCustomerCredit($ticket->getPrize(), $ticket->getCustomerId());
-            $ticket->setTransactionId($transaction->getId())
+            $ticket->setPayoutTransactionId($transaction->getId())
                 ->setStatus(Status::STATUS_TRANSFERED);
         }
     }
