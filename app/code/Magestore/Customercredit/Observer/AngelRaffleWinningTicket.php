@@ -72,7 +72,7 @@ class AngelRaffleWinningTicket implements ObserverInterface
             $transaction = $this->_transactionFactory->create();
             $transaction->addTransactionHistory(
                 $ticket->getCustomerId(),
-                TransactionType::TYPE_PURCHASE_TICKET,
+                TransactionType::TYPE_WIN_RAFFLE,
                 __('Winning Ticket %1', $product->getName()),
                 null,
                 $ticket->getPrize()
