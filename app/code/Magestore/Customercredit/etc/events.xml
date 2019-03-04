@@ -33,6 +33,9 @@
     <event name="angel_raffle_winning_ticket_ticket">
         <observer name="angel_raffle_winning_ticket_by_credit" instance="Magestore\Customercredit\Observer\AngelRaffleWinningTicket"/>
     </event>
+    <event name="payout_request_cancel">
+        <observer name="payout_request_cancel_add_credit" instance="Magestore\Customercredit\Observer\PayoutRequestCancel"/>
+    </event>
     <event name="sales_model_service_quote_submit_before">
         <observer name="customercredit_sales_model_service_quote_submit_before" instance="Magestore\Customercredit\Observer\ConvertQuoteToOrder"/>
     </event>

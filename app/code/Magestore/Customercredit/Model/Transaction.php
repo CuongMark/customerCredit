@@ -81,6 +81,13 @@ class Transaction extends \Magento\Framework\Model\AbstractModel
         return parent::beforeSave();
     }
 
+    /**
+     * @param $customer_id
+     * @param $transaction_type_id
+     * @param $transaction_detail
+     * @param $order_id
+     * @param $amount_credit
+     */
     public function addTransactionHistory($customer_id, $transaction_type_id, $transaction_detail, $order_id, $amount_credit)
     {
         if($amount_credit == 0){
