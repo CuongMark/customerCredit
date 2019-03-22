@@ -62,25 +62,26 @@ class AngelFiftyCreateNewTicket implements ObserverInterface
     {
         /** @var Ticket $ticket */
         $ticket = $observer->getTicket();
-        $ticketData = $ticket->getData();
-        if ($ticketData['status'] == Status::STATUS_PENDING){
+        $product = $observer->getProduct();
+        if ($ticket->getStatus() == Status::STATUS_PENDING){
             /** @var Customercredit $customerCredit */
             $customerCredit = $this->_customercredit->create();
-            $credit = $customerCredit->getCreditByCustomerId($ticketData['customer_id']);
-            if ((float)$credit->getCreditBalance() < $ticketData['price']){
+            $credit = $customerCredit->getCreditByCustomerId($ticket->getCustomerId());
+            if ((float)$credit->getCreditBalance() < $ticket->getPrice()){
                 throw new \Exception(__('Don\'t have enough credit'));
             }
             /** @var Transaction $transaction */
             $transaction = $this->_transactionFactory->create();
             $transaction->addTransactionHistory(
-                $ticketData['customer_id'],
+                $ticket->getCustomerId(),
                 TransactionType::TYPE_PURCHASE_TICKET,
-                __('Purchase Ticket %1', $ticketData['product_name']),
+                __('Purchase Ticket %1', $product->getName()),
                 null,
-                - $ticketData['price']
+                - $ticket->getPrice()
             );
-            $customerCredit->changeCustomerCredit( - $ticketData['price'], $ticketData['customer_id']);
+            $customerCredit->changeCustomerCredit( - $ticket->getPrice(), $ticket->getCustomerId());
             $ticket->setData('credit_transaction_id', $transaction->getId());
+            $ticket->setStatus(Status::STATUS_PROCESSING);
         }
         return $this;
     }

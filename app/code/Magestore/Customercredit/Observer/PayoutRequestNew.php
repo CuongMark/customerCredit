@@ -74,11 +74,12 @@ class PayoutRequestNew implements ObserverInterface
             $transaction->addTransactionHistory(
                 $payout->getCustomerId(),
                 TransactionType::TYPE_PAYOUT_REQUEST,
-                __('Create Payout request %1'), $payout->getPayoutId(),
+                __('Create Payout request %1',$payout->getPayoutId()),
                 null,
                 - $payout->getAmount()
             );
             $customerCredit->changeCustomerCredit( - $payout->getAmount(), $payout->getCustomerId());
+            $payout->setStatus(Status::STATUS_PROCESSING);
             $payout->setCreditTransactionId($transaction->getId());
         }
     }

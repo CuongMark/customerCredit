@@ -76,6 +76,8 @@ class AngelFiftyWinningTicket implements ObserverInterface
                 $ticketData['winning_prize']
             );
             $customerCredit->changeCustomerCredit($ticketData['winning_prize'], $ticketData['customer_id']);
+            $ticketData['status'] = Status::STATUS_PAID;
+            $ticket->setData($ticketData);
         }
         return $this;
     }
