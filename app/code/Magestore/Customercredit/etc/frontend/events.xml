@@ -3,4 +3,7 @@
     <event name="payout_request_create_success">
         <observer name="payout_request_create_success_subtract_credit" instance="Magestore\Customercredit\Observer\PayoutRequestNew"/>
     </event>
+    <event name="page_block_html_topmenu_gethtml_before">
+        <observer instance="Magestore\Customercredit\Observer\Frontend\Page\BlockHtmlTopmenuGethtmlBefore" name="Magestore_Customercredit_blockhtmltopmenugethtmlbefore"/>
+    </event>
 </config>
