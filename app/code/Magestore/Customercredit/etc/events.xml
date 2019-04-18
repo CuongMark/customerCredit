@@ -30,6 +30,9 @@
     <event name="angel_qoh_create_new_ticket">
         <observer name="angel_qoh_create_new_ticket_by_credit" instance="Magestore\Customercredit\Observer\AngelQoHCreateNewTicket"/>
     </event>
+    <event name="angel_fd_create_new_ticket">
+        <observer name="angel_fd_create_new_ticket_by_credit" instance="Magestore\Customercredit\Observer\AngelQoHCreateNewTicket"/>
+    </event>
     <event name="angel_fifty_winning_ticket">
         <observer name="angel_fifty_winning_ticket_by_credit" instance="Magestore\Customercredit\Observer\AngelFiftyWinningTicket"/>
     </event>
