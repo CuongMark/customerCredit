@@ -22,8 +22,8 @@
 
 namespace Magestore\Customercredit\Observer;
 
-use Angel\RaffleClient\Model\Ticket;
-use Angel\RaffleClient\Model\TicketRepository;
+use Angel\QoH\Model\Ticket;
+use Angel\QoH\Model\TicketRepository;
 use Magento\Framework\Event\ObserverInterface;
 use Magento\Sales\Model\Order;
 use Magestore\Customercredit\Model\TransactionType;
